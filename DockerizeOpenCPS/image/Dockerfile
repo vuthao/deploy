@@ -1,0 +1,24 @@
+# Author: VietOpenCPS
+#
+# Build: docker build -t vietopencps/liferay-all-in-one:0.01 .
+# Run: docker run -d -p 8080:8080 --name vietopencps vietopencps/liferay-all-in-one:0.01
+#
+
+FROM java:7-jdk
+MAINTAINER Tan Nguyen Van "tan.nv@netnam.vn"
+
+RUN wget -q http://172.17.0.1/server.zip -O /server.zip \
+    && unzip /server.zip \
+    && rm /server.zip
+
+COPY config/* /server/
+
+WORKDIR /server/
+
+EXPOSE 8080
+
+# docker entrypoint
+COPY docker-entrypoint.sh /
+ENTRYPOINT ["/docker-entrypoint.sh"]
+
+CMD ["start-tomcat"]
