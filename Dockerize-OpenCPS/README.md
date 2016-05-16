@@ -1,3 +1,19 @@
+# Dockerize OpenCPS  
+* Dự án OpenCPS áp dụng công nghệ Docker. Ứng dụng OpenCPS được đóng gói trong Docker Image, sau đó được lưu trữ trên Docker hub để chia sẻ cho cộng đồng  
+* Các version của images được xác định bởi các tag, mặc định version của image là "latest"  
+* Mọi người sẽ download image về và sử dụng theo hướng dẫn  
+
+### Các thành phần đóng gói:  
+* Java 1.7  
+* Liferay (Bundle with tomcat 7) đã được đóng gói, tích hợp sẵn Tomcat  
+* Mariadb 10  
+
+### Version hiện tại của ứng dụng:  
+* Version OpenCPS v0.0.1  
+
+### Các tính năng chính:  
+
+
 # Yêu cầu  
 * Cài đặt Docker  
 * Cài đặt Docker-compose  
