@@ -29,7 +29,7 @@ Link tài liệu tham khảo cài đặt: https://docs.docker.com/installation/c
 * Bước 2: Truy cập vào thư mục deploy/DockerizeOpenCPS/compose/  
   #cd deploy/DockerizeOpenCPS/compose/  
 * Bước 3: Pull image từ Docker hub  
-  #docker pull vietopencps/liferay-all-in-one:0.01  
+  #docker pull vietopencps/liferay-all-in-one  
 * Bước 4: Chạy Docker-compose để tạo các containers  
   #docker-compose -f docker-compose.yml up -d  
 * Bước 5: Kiểm tra  
