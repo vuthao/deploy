@@ -11,7 +11,7 @@ Link tài liệu tham khảo cài đặt: https://docs.docker.com/installation/c
 * Bước 3: Chạy script cài đặt Docker  
   #curl -fsSL https://get.docker.com/ | sh  
 * Bước 4: Chạy Docker Daemon  
-  #sudo service docker start  
+  #service docker start  
 * Bước 5: Cho phép Docker tự động run trong quá trình khởi động VM  
   #chkconfig docker on  
 * Bước 6: Kiểm tra  
@@ -19,10 +19,10 @@ Link tài liệu tham khảo cài đặt: https://docs.docker.com/installation/c
 
 # Cài đặt Docker-Compose  
 * Bước 1: Chạy scipt và cài đặt Docker-compose  
-  ```#sudo wget https://github.com/docker/compose/releases/download/1.7.1/docker-compose-`uname -s`-`uname -m` -O /usr/local/bin/docker-compose```   
+  ```#wget https://github.com/docker/compose/releases/download/1.7.1/docker-compose-`uname -s`-`uname -m` -O /usr/local/bin/docker-compose```   
 
 * Bước 2:  
-  ```#sudo chmod +x /usr/local/bin/docker-compose```  
+  ```#chmod +x /usr/local/bin/docker-compose```  
 
 # Hướng dẫn triển khai demo  
 * Bước 1: Download file Docker-compose
