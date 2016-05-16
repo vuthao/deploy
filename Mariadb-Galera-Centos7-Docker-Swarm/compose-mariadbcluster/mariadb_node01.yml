@@ -1,7 +1,7 @@
 version: '2'
 services:
   node01:
-    image: mariadb-galera
+    image: opencps/mariadb-galera
     container_name: node01
     hostname: node01
     restart: always
