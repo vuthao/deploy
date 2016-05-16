@@ -3,18 +3,19 @@
 * Các version của images được xác định bởi các tag, mặc định version của image là "latest"  
 * Mọi người sẽ download image về và sử dụng theo hướng dẫn  
 
+### Version hiện tại của ứng dụng:  
+* Version OpenCPS v0.0.1  
+
 ### Các thành phần đóng gói:  
+* Ứng dụng OpenCPS
 * Java 1.7  
 * Liferay (Bundle with tomcat 7) đã được đóng gói, tích hợp sẵn Tomcat  
 * Mariadb 10  
 
-### Version hiện tại của ứng dụng:  
-* Version OpenCPS v0.0.1  
-
 ### Các tính năng chính:  
 
 
-# Hướng dẫn sử dụng
+# Hướng dẫn sử dụng  
 
 ### Yêu cầu  
 * Cài đặt Docker  
@@ -23,7 +24,7 @@
 ### Cài đặt Docker trên Centos 7  
 Link tài liệu tham khảo cài đặt: https://docs.docker.com/installation/centos/  
 * Bước 1: Login vào máy tính, sau đó su lên quyền root  
-  ```#su -```  
+  ```$su -```  
 * Bước 2: Update các gói cài đặt  
   ```#yum update -y```  
 * Bước 3: Chạy script cài đặt Docker  
