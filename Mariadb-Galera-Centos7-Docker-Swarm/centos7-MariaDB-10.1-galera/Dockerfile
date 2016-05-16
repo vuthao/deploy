@@ -1,3 +1,5 @@
+#docker build -t opencps/mariadb-galera-docker-swarm .
+
 FROM centos:7
 MAINTAINER Nguyen Van Tan "bachkhoabk47@gmail.com"
 
