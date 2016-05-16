@@ -1,14 +1,11 @@
 # Yêu cầu  
-* Cài đặt trên HĐH Centos 7  
 * Cài đặt Docker  
-* Cài đặt Docker-Composeit  
-* Cài đặt git  
-  #yum -y install git  
+* Cài đặt Docker-compose  
 
 # Cài đặt Docker  
 Link tài liệu tham khảo cài đặt: https://docs.docker.com/installation/centos/  
 * Bước 1: Truy cập ssh vào VM, su lên quyền root  
-* Bước 2: Update OS  
+* Bước 2: Update các gói cài đặt  
   #yum update -y  
 * Bước 3: Chạy script cài đặt Docker  
   #curl -fsSL https://get.docker.com/ | sh  
@@ -16,6 +13,8 @@ Link tài liệu tham khảo cài đặt: https://docs.docker.com/installation/c
   #sudo service docker start  
 * Bước 5: Cho phép Docker tự động run trong quá trình khởi động VM  
   #chkconfig docker on  
+* Bước 6: Kiểm tra  
+  #docker run hello-world  
 
 # Cài đặt Docker-Compose  
 * Bước 1: Chạy scipt và cài đặt Docker-compose  
@@ -25,12 +24,8 @@ Link tài liệu tham khảo cài đặt: https://docs.docker.com/installation/c
   ```#sudo chmod +x /usr/local/bin/docker-compose```  
 
 # Hướng dẫn triển khai demo  
-* Bước 1: Download source code từ github  
-  #git clone https://github.com/VietOpenCPS/deploy.git  
-* Bước 2: Truy cập vào thư mục deploy/DockerizeOpenCPS/compose/  
-  #cd deploy/DockerizeOpenCPS/compose/  
-* Bước 3: Pull image từ Docker hub  
-  #docker pull opencps/liferay-all-in-one  
+* Bước 3: Download file Docker-compose
+  #wget https://github.com/VietOpenCPS/deploy/blob/master/Dockerize-OpenCPS/compose/docker-compose.yml
 * Bước 4: Chạy Docker-compose để tạo các containers  
   #docker-compose -f docker-compose.yml up -d  
 * Bước 5: Kiểm tra  
