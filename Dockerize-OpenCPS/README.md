@@ -14,11 +14,13 @@
 ### Các tính năng chính:  
 
 
-# Yêu cầu  
+# Hướng dẫn sử dụng
+
+### Yêu cầu  
 * Cài đặt Docker  
 * Cài đặt Docker-compose  
 
-# Cài đặt Docker trên Centos 7  
+### Cài đặt Docker trên Centos 7  
 Link tài liệu tham khảo cài đặt: https://docs.docker.com/installation/centos/  
 * Bước 1: Login vào máy tính, sau đó su lên quyền root  
   ```#su -```  
@@ -33,14 +35,14 @@ Link tài liệu tham khảo cài đặt: https://docs.docker.com/installation/c
 * Bước 6: Kiểm tra  
   ```#docker run hello-world```  
 
-# Cài đặt Docker-Compose  
+### Cài đặt Docker-Compose  
 * Bước 1: Chạy scipt và cài đặt Docker-compose  
   ```#wget https://github.com/docker/compose/releases/download/1.7.1/docker-compose-`uname -s`-`uname -m` -O /usr/local/bin/docker-compose```   
 
 * Bước 2:  
   ```#chmod +x /usr/local/bin/docker-compose```  
 
-# Hướng dẫn triển khai demo  
+### Hướng dẫn triển khai demo  
 * Bước 1: Download file Docker-compose  
   ```#wget https://github.com/VietOpenCPS/deploy/blob/master/Dockerize-OpenCPS/compose/docker-compose.yml```  
 * Bước 2: Chạy Docker-compose để tạo các containers  
