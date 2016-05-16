@@ -1,7 +1,7 @@
 # Author: VietOpenCPS
 #
-# Build: docker build -t opencps/liferay-all-in-one:0.01 .
-# Run: docker run -d -p 8080:8080 --name vietopencps opencps/liferay-all-in-one:0.01
+# Build: docker build -t opencps/liferay-all-in-one:0.0.1 -t opencps/liferay-all-in-one:latest .
+# Run: docker run -d -p 8080:8080 --name vietopencps opencps/liferay-all-in-one
 #
 
 FROM java:7-jdk
