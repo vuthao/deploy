@@ -9,15 +9,16 @@
  * ...
 
 ###  Một số phiên bản
+* Phiên bản 1: Quy trình đóng gói, hướng dẫn triển khai ứng dụng OpenCPS sử dụng Docker images
+ * Các tính năng chính:
 
-* Phiên bản 1: Triển khai Database Cluster (MariaDB Galera) sử dụng Docker Swarm
+ * Chi tiết tại thư mục Dockerize-OpenCPS  
+ > https://github.com/VietOpenCPS/deploy/tree/master/Dockerize-OpenCPS   
+
+* Phiên bản 2: Triển khai Database Cluster (MariaDB Galera) sử dụng Docker Swarm
  * Các tính năng chính::
 
  * Chi tiết tại thư mục Mariadb-Galera-Centos7-Docker-Swarm    
  > https://github.com/VietOpenCPS/deploy/tree/master/Mariadb-Galera-Centos7-Docker-Swarm  
 
-* Phiên bản 2: Quy trình đóng gói, hướng dẫn triển khai ứng dụng OpenCPS sử dụng Docker images
- * Các tính năng chính:
 
- * Chi tiết tại thư mục Dockerize-OpenCPS  
- > https://github.com/VietOpenCPS/deploy/tree/master/Dockerize-OpenCPS   

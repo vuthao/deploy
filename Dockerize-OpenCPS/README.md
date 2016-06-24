@@ -4,7 +4,7 @@
 * Mọi người sẽ download image về và sử dụng theo hướng dẫn  
 
 ### Version hiện tại của ứng dụng:  
-* Version OpenCPS v0.0.1  
+* Version OpenCPS v1.0   
 
 ### Các thành phần đóng gói:  
 * Ứng dụng OpenCPS
@@ -15,60 +15,15 @@
 ### Các tính năng chính:  
 
 
-# Hướng dẫn sử dụng  
+# Hướng dẫn triển khai Offline 
+* Có 2 cách để triển khai ứng dụng Offline, mọi người có thể tham khảo:
+  * Triển khai ứng dụng OpenCPS bằng Docker theo mô hình All-in-one, tất cả được đóng gói trong một container  
+    * Thông tin chi tiết mọi người có thể tham khảo tại đường dẫn Wiki:  
+    [Wiki: Quy trình triển khai Offline cho người dùng cuối theo mô hình một container all-in-one](https://github.com/VietOpenCPS/deploy/wiki/H%C6%B0%E1%BB%9Bng-d%E1%BA%ABn-tri%E1%BB%83n-khai-%E1%BB%A9ng-d%E1%BB%A5ng-OpenCPS-Offline-cho-ng%C6%B0%E1%BB%9Di-d%C3%B9ng-theo-m%C3%B4-h%C3%ACnh-all-in-one,-t%E1%BA%A5t-c%E1%BA%A3-%C4%91%C3%B3ng-g%C3%B3i-trong-m%E1%BB%99t-container)  
+  * Triển khai ứng dụng OpenCPS bằng Docker theo mô hình chạy 2 container  
+    * Thông tin chi tiết mọi người có thể tham khảo tại đường dẫn Wiki:  
+    [Wiki: Quy trình triển khai Offline cho người dùng cuối theo mô hình chạy 2 container](https://github.com/VietOpenCPS/deploy/wiki/H%C6%B0%E1%BB%9Bng-d%E1%BA%ABn-tri%E1%BB%83n-khai-%E1%BB%A9ng-d%E1%BB%A5ng-OpenCPS-Offline-cho-ng%C6%B0%E1%BB%9Di-d%C3%B9ng-m%C3%B4-h%C3%ACnh-ch%E1%BA%A1y-2-container)  
 
-### Yêu cầu  
-* Cài đặt Docker  
-* Cài đặt Docker-compose  
-
-### Cài đặt Docker trên Centos 7  
-Link tài liệu tham khảo cài đặt: https://docs.docker.com/installation/centos/  
-* Bước 1: Login vào máy tính, sau đó su lên quyền root  
-  ```$su -```  
-* Bước 2: Update các gói cài đặt  
-  ```#yum update -y```  
-* Bước 3: Chạy script cài đặt Docker  
-  ```#curl -fsSL https://get.docker.com/ | sh```  
-* Bước 4: Chạy Docker Daemon  
-  ```#service docker start```  
-* Bước 5: Cho phép Docker tự động run trong quá trình khởi động VM  
-  ```#chkconfig docker on```  
-* Bước 6: Kiểm tra  
-  ```#docker run hello-world```  
-
-### Cài đặt Docker-Compose  
-* Bước 1: Chạy scipt và cài đặt Docker-compose  
-  ```#wget https://github.com/docker/compose/releases/download/1.7.1/docker-compose-`uname -s`-`uname -m` -O /usr/local/bin/docker-compose```   
-
-* Bước 2:  
-  ```#chmod +x /usr/local/bin/docker-compose```  
-
-### Hướng dẫn triển khai demo  
-* Bước 1: Download file Docker-compose  
-  ```#wget https://github.com/VietOpenCPS/deploy/blob/master/Dockerize-OpenCPS/compose/docker-compose.yml```  
-* Bước 2: Chạy Docker-compose để tạo các containers  
-  ```#docker-compose -f docker-compose.yml up -d```  
-* Bước 3: Kiểm tra  
- * Trên command line:  
-   ```#docker ps```               (Sẽ xuất hiện 2 containers)  
-   ```#netstat -plnt```           (Port 8080 sẽ mở)  
- * Kiểm tra trên giao diện web, truy cập vào địa chỉ:  
-   * localhost:8080  
-
-# Hướng dẫn sử dụng cho người phát triển (Developer)  
-* Viết Dockerfile để đóng gói ứng dụng OpenCPS, bao gồm các thành phần   
-    *  Java 7
-    *  Ứng dụng OpenCPS
-  * Chú ý: Trong cấu hình Dockerfile, có câu lệnh 
-    *  RUN wget -q http://172.17.0.1/server.zip -O /server.zip \  
-    *  Ứng dụng OpenCPS được đóng gói với tên là server.zip.
-    *  Sau đó sử dụng giao thức http để download gói ưng dụng trên localhost
-    *  Cách làm
-      *  Cài http
-         #yum -y install httpd
-      * Chown quyền httpd
-         #chown apache:apache /var/www/html
-      * Copy file server.zip vaò trong thư mục /var/www/html
-         #cp server.zip /var/www/html 
-* Tạo image từ Dockerfile  
-  #docker build -t opencps/liferay-all-in-one:0.0.1 -t opencps/liferay-all-in-one:latest .
+# Hướng dẫn đóng gói ứng dụng OpenCPS sử dụng Docker image cho người phát triển (Developer)  
+* Thông tin chi tiết về quy trình đóng gói ứng dụng OpenCPS, mọi người có thể tham khảo tại đường dẫn Wiki:
+  * [Wiki: Quy trình đóng gói ứng dụng cho nhà phát triển](https://github.com/VietOpenCPS/deploy/wiki/H%C6%B0%E1%BB%9Bng-d%E1%BA%ABn-quy-tr%C3%ACnh-%C4%91%C3%B3ng-g%C3%B3i-Docker-image-cho-nh%C3%A0-ph%C3%A1t-tri%E1%BB%83n-%28Developer%29)
