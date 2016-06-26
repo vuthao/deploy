@@ -1,4 +1,22 @@
-	`echo '####################################'
+#!/bin/bash
+# VietOpenCPS
+# Copyright (C) 2016 VietOpenCPS Infra Team
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software Foundation
+# Ha Noi, VietNam
+
+echo '####################################'
 echo '####### INSTALL MARIADB 10.1 #######'
 echo '####################################'
 
@@ -10,10 +28,8 @@ echo 'baseurl = http://yum.mariadb.org/10.1/centos7-amd64/' >>/etc/yum.repos.d/M
 echo 'gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB' >> /etc/yum.repos.d/MariaDB.repo
 echo 'gpgcheck=1' >> /etc/yum.repos.d/MariaDB.repo
 
-yum clean all
-yum makecache
-
 #CAI DAT MariaDB Server
+setenforce 0
 yum install MariaDB-server MariaDB-client -y
 
 pkg1=$(rpm -qa| grep MariaDB-server)
@@ -60,6 +76,9 @@ echo ''
 #Import du lieu vao db opencps
 echo "Import database OPENCPS"
 echo "==========================================="
+yum -y install epel-release >/dev/null 
+yum -y install sshpass >/dev/null 2>&1
+yum -y remove epel-release >/dev/null 
 pkg1=$(rpm -qa| grep wget)
 if [[ "$pkg1" == *"wget"*  ]];then
         echo 'Wget package... OK!'
@@ -91,22 +110,46 @@ until [[ "$check" == *"changemaster"* ]]; do
 read -p "Please input your Master's IP: " ipmaster
 if echo "$ipmaster" | egrep -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' >/dev/null 2>&1
 then
-    VALID_IP_ADDRESS="$(echo $ipmaster | awk -F'.' '$1 <=255 && $2 <= 255 && $3 <= 255 && $4 <= 255')"
-    if [ -z "$VALID_IP_ADDRESS" ]
-    then
-        echo "====The IP address wasn't valid; octets must be less than 256===="
-    else
-        touch /tmp/scp
-        echo 'scp -o "StrictHostKeyChecking=no" -q root@'$ipmaster':/tmp/changemaster.sql /tmp/changemaster.sql' > /tmp/scp
-	echo "=Please input your Master's Root Password (System Password, not DB Password)="
-	sh /tmp/scp >/dev/null 2>&1 && rm -rf /tmp/scp && cd /tmp
-        cd /tmp/ && check=$(ls changemaster.sql 2>/dev/null)
-        if [[ "$check" == *"changemaster"*  ]];then
-        mysql -uroot -p$password -e "source changemaster.sql;" && rm -rf /tmp/changemaster.sql >/dev/null 2>&1
-        else
-            echo "====This IP is not your Master DB's IP Address===="
-        fi
-    fi
+ VALID_IP_ADDRESS="$(echo $ipmaster | awk -F'.' '$1 <=255 && $2 <= 255 && $3 <= 255 && $4 <= 255')"
+ if [ -z "$VALID_IP_ADDRESS" ]
+ then
+   echo "====The IP address wasn't valid; octets must be less than 256===="
+ else
+   touch /tmp/scp
+   read -s -p "Please input your Master's Root Password (System Password, not DB Password): " masterpassword
+   echo 'sshpass -p '$masterpassword' scp -o "StrictHostKeyChecking=no" -q root@'$ipmaster':/tmp/changemaster.sql /tmp/changemaster.sql' > /tmp/scp
+   sh /tmp/scp >/dev/null 2>&1 && rm -rf /tmp/scp && cd /tmp
+   cd /tmp/ && check=$(ls changemaster.sql 2>/dev/null)
+   if [[ "$check" == *"changemaster"*  ]];then
+     mysql -uroot -p$password -e "source changemaster.sql;" && rm -rf /tmp/changemaster.sql >/dev/null 2>&1
+     echo ''	
+     export numeth=$(ip addr |grep 'inet ' |grep -v '127.0.0.1'| cut -d' ' -f6|cut -d/ -f1 |wc -l)
+     if [[ "$numeth" > 1 ]]; then
+       title="You have $numeth Network Interfaces, please choose one that will be used to connect to Master"
+       prompt="Pick an Network Interface:"
+       options=($(hostname -I))
+       echo "$title"
+       PS3="$prompt "
+       select opt in "${options[@]}"; do
+	  case "$REPLY" in
+	    1 ) export ipslave=$opt && break;;
+	    2 ) export ipslave=$opt && break;;
+	    $(( ${#options[@]}+1 )) ) echo "Goodbye!"; break;;
+	    *) echo "Invalid option. Try another one.";continue;;
+	  esac
+       done
+     else
+       export ipslave=$(hostname -I)
+     fi
+     echo 'sshpass -p '$masterpassword' ssh -o "StrictHostKeyChecking=no" -q root@'$ipmaster '"firewall-cmd --permanent --zone=mariadb --add-source='$ipslave'; firewall-cmd --reload"' > /tmp/firewall
+     sh /tmp/firewall >/dev/null 2>&1 && rm -rf /tmp/firewall
+     echo ''
+     echo "Firewall in Master Server was added rules for this Slave"
+	
+   else
+     echo "====This IP is not your Master DB's IP Address===="
+   fi
+ fi
 else
     echo "====The IP address was malformed===="
 fi
@@ -120,6 +163,7 @@ echo "==========================================="
 mysql -uroot -p$password -e "start slave;"
 echo "** DONE! **"
 echo "==========================================="
+setenforce 1
 
 echo ''
 echo '----------------Ket Qua-------------------'
