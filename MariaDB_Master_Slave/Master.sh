@@ -98,11 +98,29 @@ if [[ "$pkg1" == *"MariaDB-server"*  ]];then
  echo ''
  echo "Create configure file for Slave"
  echo "==========================================="
- export ipmaster=$(hostname -I)
+ export numeth=$(ip addr |grep 'inet ' |grep -v '127.0.0.1'| cut -d' ' -f6|cut -d/ -f1 |wc -l)
+ if [[ "$numeth" > 1 ]] ; then
+ title="You have $numeth Network Interfaces, please choose IP that could connect to Slave Server"
+ prompt="Choose option: "
+ options=($(hostname -I))
+
+     echo "$title"
+     PS3="$prompt "
+     select opt in "${options[@]}"; do
+         case "$REPLY" in
+         1 ) export ipmaster=$opt && break;;
+         2 ) export ipmaster=$opt && break;;
+         $(( ${#options[@]}+1 )) ) echo "Goodbye!"; break;;*) echo "Invalid option. Try another one.";continue;;
+         esac
+     done
+ else
+     export ipmaster=$(hostname -I)
+ fi
+
  echo "change master to master_host='"$ipmaster"'," > /tmp/changemaster.sql
  echo "master_user='"slave"'," >> /tmp/changemaster.sql
  echo "master_password='"$passslave"'," >> /tmp/changemaster.sql
- echo "master_port=3306," >> /tmp/changemaster
+ echo "master_port=3306," >> /tmp/changemaster.sql
  master_log_file=$(mysql -uroot -p$password -s -e "select variable_value from information_schema.global_status where variable_name='Binlog_snapshot_file';"| awk '{print $1}';)
  echo "master_log_file='"$master_log_file"'," >> /tmp/changemaster.sql
  master_log_pos=$(mysql -uroot -p$password -s -e "select variable_value from information_schema.global_status where variable_name='BINLOG_SNAPSHOT_POSITION';"| awk '{print $1}';)
