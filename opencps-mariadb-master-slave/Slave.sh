@@ -65,6 +65,7 @@ sed -i '/mysqld/ a\server_id=2' /etc/my.cnf.d/server.cnf
 #sed -i '/mysqld/ a\log-slave-updates' /etc/my.cnf.d/server.cnf
 sed -i '/mysqld/ a\log-bin=slave-bin' /etc/my.cnf.d/server.cnf
 sed -i '/mysqld/ a\log_error=/var/log/mysql/mysql.log' /etc/my.cnf.d/server.cnf
+rm -rf /etc/my.cnf
 ln -s /etc/my.cnf.d/server.cnf /etc/my.cnf >/dev/null 2>&1
 echo "** DONE! **"
 echo "==========================================="
