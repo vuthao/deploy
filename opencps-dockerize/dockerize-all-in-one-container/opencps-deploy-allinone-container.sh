@@ -1,6 +1,8 @@
 #!/bin/bash
 # bachkhoabk47@gmail.com
 
+############## Installing for Centos 7, Ubuntu & Fedora #####################################
+
 DIR="`pwd`"
 DIR_CURR=$DIR/docker-compose
 
@@ -72,6 +74,8 @@ function install_docker {
  if which docker-compose >/dev/null; then
     echo "docker-compose installed, so go to next step"
  else
+    ############## Installing Docker-compose on Centos 7, Ubuntu, Fedora ###############
+    # Download and run script for installing docker-compose
     sudo wget https://github.com/docker/compose/releases/download/1.7.1/docker-compose-`uname -s`-`uname -m` -O /usr/local/bin/docker-compose
     # Chown permission
     sudo chmod +x /usr/local/bin/docker-compose
@@ -90,12 +94,6 @@ function check_distro {
 }
 check_distro
 
-############## Installing Docker-compose on Centos, Ubuntu, Fedora ###############
-# Download and run script for installing docker-compose
-sudo wget https://github.com/docker/compose/releases/download/1.7.1/docker-compose-`uname -s`-`uname -m` -O /usr/local/bin/docker-compose
-# Chown permission
-sudo chmod +x /usr/local/bin/docker-compose
-
 ##########################################################################
 
 ######################## DEPLOYING OPENCPS APPLICATION ##################
@@ -111,13 +109,13 @@ if [ -d "$DIR_CURR" ]; then
   echo "You enteredi: $text"
   
   if [ $text == "y" ]; then
-    sudo svn export https://github.com/VietOpenCPS/deploy/tree/master/opencps-dockerize/dockerize-all-in-one-container/docker-compose --force
+    sudo svn export https://github.com/VietOpenCPS/deploy.git/trunk/opencps-dockerize/dockerize-all-in-one-container/docker-compose --force
   else
     echo "You've exited running script"
     exit;
   fi 
 else
-  sudo svn export https://github.com/VietOpenCPS/deploy/tree/master/opencps-dockerize/dockerize-all-in-one-container/docker-compose
+  sudo svn export https://github.com/VietOpenCPS/deploy/trunk/opencps-dockerize/dockerize-all-in-one-container/docker-compose
 fi
 
 sh -c `cd $DIR_CURR && sudo docker-compose -f docker-compose.yml up -d`
