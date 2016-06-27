@@ -111,13 +111,13 @@ if [ -d "$DIR_CURR" ]; then
   echo "You enteredi: $text"
   
   if [ $text == "y" ]; then
-    sudo svn export https://github.com/VietOpenCPS/deploy.git/trunk/Dockerize-OpenCPS/all-in-one-container/docker-compose --force
+    sudo svn export https://github.com/VietOpenCPS/deploy/tree/master/opencps-dockerize/dockerize-all-in-one-container/docker-compose --force
   else
     echo "You've exited running script"
     exit;
   fi 
 else
-  sudo svn export https://github.com/VietOpenCPS/deploy.git/trunk/Dockerize-OpenCPS/all-in-one-container/docker-compose
+  sudo svn export https://github.com/VietOpenCPS/deploy/tree/master/opencps-dockerize/dockerize-all-in-one-container/docker-compose
 fi
 
 sh -c `cd $DIR_CURR && sudo docker-compose -f docker-compose.yml up -d`
