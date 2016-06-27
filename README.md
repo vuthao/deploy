@@ -26,3 +26,7 @@
  
  * Chi tiết tại thư mục Mariadb-Galera-Centos7-Docker-Swarm    
  > https://github.com/VietOpenCPS/deploy/tree/master/opencps-mariadb-galera-centos7-dockerswarm  
+
+### Giấy phép
+* OpenCPS được phát hành theo giấy phép GNU Affero General Public License v3+.
+* Xem toàn văn giấy phép trong tệp [LICENSE](LICENSE)
