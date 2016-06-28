@@ -12,7 +12,7 @@ DIR_CURR=$DIR/docker-compose
 
 M_PLATFORM_UBUNTU=`python -mplatform |grep -Eo "Ubuntu"`
 M_PLATFORM_CENTOS=`python -mplatform |grep -Eo "centos"`
-M_PLATFORM_FEDORA=`python3 -mplatform |grep -Eo "fedora"`
+M_PLATFORM_FEDORA=`python -mplatform |grep -Eo "fedora"`
 echo $M_PLATFORM_CENTOS
 
 if [[ $EUID -ne 0 ]]; then
