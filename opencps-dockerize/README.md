@@ -1,5 +1,5 @@
 # Dockerize OpenCPS  
-* Dự án OpenCPS áp dụng công nghệ Docker. Ứng dụng OpenCPS được đóng gói trong Docker Image, sau đó được lưu trữ trên Docker hub nhằm mục đích để mọi người có thể chạy được bản đóng gói OpenCPS mới nhất trên máy tính của mình v
+* Dự án OpenCPS áp dụng công nghệ Docker. Ứng dụng OpenCPS được đóng gói trong Docker Image, sau đó được lưu trữ trên Docker hub nhằm mục đích để mọi người có thể chạy được bản đóng gói OpenCPS mới nhất trên máy tính của mình 
 * Các version của images được xác định bởi các tag, mặc định version của image là "latest"  
 * Để sử dụng image OpenCPS mới nhất mọi người sẽ download image về và sử dụng theo hướng dẫn  
 
