@@ -128,10 +128,10 @@ echo $DIR_CURR
 
 if [ -d "$DIR_CURR" ]; then
   
-  echo -n "Folder exists. Please type y for overried folder"."</br>"
-  echo -n "y/n"
+  echo -n "Folder exists. Please type y for overried folder  -- "
+  echo -n "y/n: "
   read text
-  echo "You enteredi: $text"
+  echo "You entered:  $text"
   
   if [ $text == "y" ]; then
     svn export https://github.com/VietOpenCPS/deploy.git/trunk/opencps-dockerize/dockerize-all-in-one-container/docker-compose --force
