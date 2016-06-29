@@ -73,10 +73,14 @@ if [[ "$pkg1" == *"MariaDB-server-10.1."*  ]];then
 	 echo "==========================================="
 	 mkdir /var/log/mysql
 	 sed -i '/# this is only for the mysqld standalone daemon/d' /etc/my.cnf.d/server.cnf
-	 sed -i "/mysqld/ a\replicate-do-db=opencps" /etc/my.cnf.d/server.cnf
-	 mysql -u root -p$password -e "create database opencps";
+	 #sed -i "/mysqld/ a\replicate-do-db=opencps" /etc/my.cnf.d/server.cnf
+	 #mysql -u root -p$password -e "create database opencps";
 	 sed -i '/mysqld/ a\server_id=1' /etc/my.cnf.d/server.cnf
-	 sed -i '/mysqld/ a\log-bin=master-bin' /etc/my.cnf.d/server.cnf
+	 
+	 # We use binlog format "mixed" (binlog-format=mixed) to allow a replication of operations with foreign keys.
+	 # Note: Do not use binlog format "statement" (otherwise you will get errors later on!)
+	 sed -i '/mysqld/ a\log-bin=mysql-bin' /etc/my.cnf.d/server.cnf
+	 sed -i '/mysqld/ a\binlog-format=mixed' /etc/my.cnf.d/server.cnf
 	 sed -i '/mysqld/ a\log_error=/var/log/mysql/mysql.log' /etc/my.cnf.d/server.cnf
 	 ln -s /etc/my.cnf.d/server.cnf /etc/my.cnf > /dev/null 2>&1
 	 echo "** DONE! **"

@@ -88,8 +88,8 @@ if [[ "$pkg1" == *"MariaDB-server-10.1."*  ]];then
 	echo "==========================================="
 	mkdir /var/log/mysql
 	sed -i '/# this is only for the mysqld standalone daemon/d' /etc/my.cnf.d/server.cnf
-	mysql -u root -p$password -e "create database opencps";             
-	sed -i "/mysqld/ a\replicate-do-db=opencps" /etc/my.cnf.d/server.cnf
+	#mysql -u root -p$password -e "create database opencps";             
+	#sed -i "/mysqld/ a\replicate-do-db=opencps" /etc/my.cnf.d/server.cnf
 	sed -i '/mysqld/ a\innodb_file_per_table=1' /etc/my.cnf.d/server.cnf
 	sed -i '/mysqld/ a\read-only=1' /etc/my.cnf.d/server.cnf
 	sed -i '/mysqld/ a\max_allowed_packet=64M' /etc/my.cnf.d/server.cnf
