@@ -134,7 +134,7 @@ if [ -d "$DIR_CURR" ]; then
   echo "You entered : $text"
   
   if [ $text == "y" ]; then
-    svn export https://github.com/VietOpenCPS/deploy.git/trunk/opencps-dockerize/dockerize-all-in-two-containers/docker-compose --force
+    svn export https://github.com/VietOpenCPS/deploy.git/trunk/opencps-dockerize/dockerize-all-in-two-containers/docker-compose-allintwo --force
     sh -c `cd $DIR_CURR && docker-compose -f docker-compose.yml up -d`
     echo "Done! You can open browser with the address: localhost:8080 for testing application. Thanks"
   else
@@ -142,7 +142,7 @@ if [ -d "$DIR_CURR" ]; then
     exit;
   fi 
 else
-  svn export https://github.com/VietOpenCPS/deploy/trunk/opencps-dockerize/dockerize-all-in-two-containers/docker-compose
+  svn export https://github.com/VietOpenCPS/deploy/trunk/opencps-dockerize/dockerize-all-in-two-containers/docker-compose-allintwo
   sh -c `cd $DIR_CURR && docker-compose -f docker-compose.yml up -d`
   echo "Done! You can open browser with the address: localhost:8080 for testing application. Thanks"
 fi
