@@ -4,7 +4,7 @@
 ############## Installing for Centos 7, Ubuntu & Fedora #####################################
 
 DIR="`pwd`"
-DIR_CURR=$DIR/docker-compose
+DIR_CURR=$DIR/docker-compose-allintwo
 
 ############### Installing Docker on Centos, Ubuntu, Fedora ########################
 # Update installed package
