@@ -22,8 +22,30 @@ Trên Master Server:
 Slave Server:
 ```
 #sh Slave.sh
+
 ```
 *Lưu ý: Sau khi trên Master Server chạy xong thì mới bắt đầu chạy Slave.sh trên Slave Server.*
+
+Tiế theo sẽ tiến hành Import dữ liệu trên Master
+```
+#ImportDatabase.sh
+```
+Trong qusa trình chạy tool import này chương trình sẽ hỏi mật khẩu root Master Server 
+
+Kiểm tra lại dữ liệu trên Master và Slave.
+```
+#Master
+mysql -u root -p  -e "SELECT count(*)  FROM opencps.user_";
+
+#Slave 1
+mysql -u root -p  -e "SELECT count(*)  FROM opencps.user_";
+```
+
+Nếu có nhiều Slave, khi download tool về cần sửa lại dòng 
+```
+sed -i '/mysqld/ a\server_id=2' /etc/my.cnf.d/server.cnf
+```
+Trong đó server_id tăng dần, không trùng nhau giữa ác server
 
 ###2 - Hướng dẫn cài đặt Master-Slave thủ công
 ####Trên cả 2 Server:
